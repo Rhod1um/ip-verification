@@ -1,0 +1,24 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: pod-reader
+rules:
+- apiGroups: [""] # "" indicates the core API group
+  resources: ["pods", "services", "events", "namespaces", "nodes"]
+  verbs: ["get", "watch", "list"]
+- apiGroups: ["apps"]  # "apps" is the group for Deployments and ReplicaSets
+  resources: ["deployments", "replicasets"]  
+  verbs: ["get", "watch", "list"] 
+---  
+apiVersion: rbac.authorization.k8s.io/v1  
+kind: ClusterRoleBinding  
+metadata:  
+  name: read-pods  
+subjects:  
+- kind: ServiceAccount  
+  name: default  
+  namespace: default  
+roleRef:  
+  kind: ClusterRole  
+  name: pod-reader  
+  apiGroup: rbac.authorization.k8s.io 

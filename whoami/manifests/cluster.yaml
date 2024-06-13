@@ -1,0 +1,8 @@
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+nodes:
+  - role: control-plane
+    # port forward 30005 on the host to 8888 on this node
+    extraPortMappings:
+      - containerPort: 30003 # this is only done because we run it in kind so the kind-docker ports need to be exposed
+        hostPort: 30003 # a node will communicate to app1 pod from 30005 to 8888 from outside the cluster

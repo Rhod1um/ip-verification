@@ -1,0 +1,23 @@
+serviceAccountName: null
+
+image:
+  repository: artifactory.novus.legogroup.io/novus-api/novus-echo
+  tag: null
+  pullPolicy: IfNotPresent
+  pullSecret: novus-pull-secret
+
+resources:
+  limits:
+    cpu: 200m
+    memory: 256Mi
+  requests:
+    cpu: 100m
+    memory: 64Mi
+
+deployment:
+  replicaCount: 1
+
+ingress:
+    enabled: true
+    host: novus-echo.novus-cloud-tools.dev.dev-novus.internal.lego
+    secretName: tls-certificate
